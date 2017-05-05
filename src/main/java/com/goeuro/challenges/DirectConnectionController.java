@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class DirectConnectionController {
 
-    DirectJourneyService directJourneyService;
+    private DirectJourneyService directJourneyService;
 
     @Autowired
     public DirectConnectionController(DirectJourneyService directJourneyService) {

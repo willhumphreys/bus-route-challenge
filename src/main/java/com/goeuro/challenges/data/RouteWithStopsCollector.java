@@ -9,7 +9,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 
-public class RouteWithStopsCollector implements Collector<Integer, RouteWithStopsAggregator, RouteWithStops> {
+class RouteWithStopsCollector implements Collector<Integer, RouteWithStopsAggregator, RouteWithStops> {
     @Override
     public Supplier<RouteWithStopsAggregator> supplier() {
         return RouteWithStopsAggregator::new;
