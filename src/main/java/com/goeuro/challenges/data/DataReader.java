@@ -9,6 +9,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Spliterator;
+import java.util.stream.StreamSupport;
 
 import static java.lang.invoke.MethodHandles.lookup;
 import static org.slf4j.LoggerFactory.getLogger;
@@ -31,8 +33,14 @@ public class DataReader {
             LOG.info("File contains {} routes", lineCount);
 
             return bufferedReader.lines()
-                    .map(line -> Arrays.stream(line.split(" "))
-                            .mapToInt(Integer::parseInt).boxed().collect(new RouteWithStationsCollector()))
+                    .map(line -> {
+                         Spliterator<Integer> iterator = Arrays.stream(line.split(" "))
+                                .mapToInt(Integer::parseInt).boxed().spliterator();
+
+                        RouteWithStationsCollector collector = new RouteWithStationsCollector();
+                        iterator.tryAdvance(collector::setRoute);
+                        return StreamSupport.stream(iterator, false).collect(collector);
+                    })
                     .collect(new RouteStopMapCollector());
         } catch (IOException e) {
             LOG.error("Problem reading the route data.", e);

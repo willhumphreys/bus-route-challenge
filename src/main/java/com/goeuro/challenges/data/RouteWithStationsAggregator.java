@@ -4,7 +4,6 @@ import java.util.function.Supplier;
 
 public class RouteWithStationsAggregator implements Supplier<RouteWithStationsAggregator> {
 
-    private boolean isRouteSet;
     private final RouteWithStations.Builder routeWithStationsBuilder;
 
     RouteWithStationsAggregator() {
@@ -17,8 +16,8 @@ public class RouteWithStationsAggregator implements Supplier<RouteWithStationsAg
         return this;
     }
 
-    RouteWithStations finish() {
-        return this.routeWithStationsBuilder.build();
+    RouteWithStations finish(int route) {
+        return this.routeWithStationsBuilder.setRoute(route).build();
     }
 
     @Override
@@ -26,12 +25,8 @@ public class RouteWithStationsAggregator implements Supplier<RouteWithStationsAg
         return new RouteWithStationsAggregator();
     }
 
-    void addData(Integer routeOrStop) {
-        if(isRouteSet) {
-            this.routeWithStationsBuilder.setRoute(routeOrStop);
-            isRouteSet = false;
-        } else {
-            this.routeWithStationsBuilder.addStation(routeOrStop);
-        }
+    RouteWithStationsAggregator addStation(Integer station) {
+        this.routeWithStationsBuilder.addStation(station);
+        return this;
     }
 }

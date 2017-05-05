@@ -11,14 +11,16 @@ import java.util.stream.Collector;
 
 class RouteWithStationsCollector implements Collector<Integer, RouteWithStationsAggregator, RouteWithStations> {
 
+    private Integer route;
+
     @Override
     public Supplier<RouteWithStationsAggregator> supplier() {
-        return RouteWithStationsAggregator::new;
+        return new RouteWithStationsAggregator();
     }
 
     @Override
     public BiConsumer<RouteWithStationsAggregator, Integer> accumulator() {
-        return RouteWithStationsAggregator::addData;
+        return RouteWithStationsAggregator::addStation;
     }
 
     @Override
@@ -28,11 +30,15 @@ class RouteWithStationsCollector implements Collector<Integer, RouteWithStations
 
     @Override
     public Function<RouteWithStationsAggregator, RouteWithStations> finisher() {
-        return RouteWithStationsAggregator::finish;
+        return routeWithStationsAggregator -> routeWithStationsAggregator.finish(route);
     }
 
     @Override
     public Set<Characteristics> characteristics() {
         return Sets.newHashSet(Characteristics.UNORDERED);
+    }
+
+    void setRoute(Integer route) {
+        this.route = route;
     }
 }
