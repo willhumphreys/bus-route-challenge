@@ -24,6 +24,7 @@ class StopsAndRoutes {
     Map<Integer, Set<Integer>> getStopRoutesMap() {
         return stopRoutesMap;
     }
+
     StopsAndRoutes build() {
         return this;
     }
