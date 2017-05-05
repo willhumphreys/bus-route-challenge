@@ -24,7 +24,7 @@ public class DataReader {
         this.dataLocation = dataLocation;
     }
 
-    StopsAndRoutes read() throws IOException {
+    RoutesAtStation read() throws IOException {
 
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(dataLocation))) {
             int lineCount = Integer.parseInt(bufferedReader.readLine());

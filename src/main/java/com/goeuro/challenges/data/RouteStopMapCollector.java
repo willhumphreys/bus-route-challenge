@@ -9,7 +9,7 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 
-class RouteStopMapCollector implements Collector<RouteWithStops, RouteStopsMapAggregator, StopsAndRoutes> {
+class RouteStopMapCollector implements Collector<RouteWithStops, RouteStopsMapAggregator, RoutesAtStation> {
     @Override
     public Supplier<RouteStopsMapAggregator> supplier() {
         return RouteStopsMapAggregator::new;
@@ -26,7 +26,7 @@ class RouteStopMapCollector implements Collector<RouteWithStops, RouteStopsMapAg
     }
 
     @Override
-    public Function<RouteStopsMapAggregator, StopsAndRoutes> finisher() {
+    public Function<RouteStopsMapAggregator, RoutesAtStation> finisher() {
         return RouteStopsMapAggregator::finish;
     }
 

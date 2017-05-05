@@ -11,19 +11,19 @@ import java.util.Set;
 @Repository
 public class DirectJourneyRepository {
 
-    private final StopsAndRoutes stopsAndRoutes;
+    private final RoutesAtStation routesAtStation;
 
     public DirectJourneyRepository(DataReader dataReader) throws IOException {
-        stopsAndRoutes = dataReader.read();
+        routesAtStation = dataReader.read();
     }
 
     public boolean isDirect(Journey journey) {
-        Optional<Set<Integer>> routesAtDeparture = stopsAndRoutes.getRoutesAtStop(journey.getDepartureSid());
+        Optional<Set<Integer>> routesAtDeparture = routesAtStation.get(journey.getDepartureSid());
         if(!routesAtDeparture.isPresent()) {
             return false;
         }
 
-        Optional<Set<Integer>> routesAtArrivals = stopsAndRoutes.getRoutesAtStop(journey.getArrivalSid());
+        Optional<Set<Integer>> routesAtArrivals = routesAtStation.get(journey.getArrivalSid());
         if(!routesAtArrivals.isPresent()) {
             return false;
         }

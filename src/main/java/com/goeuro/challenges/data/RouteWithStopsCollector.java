@@ -10,6 +10,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collector;
 
 class RouteWithStopsCollector implements Collector<Integer, RouteWithStopsAggregator, RouteWithStops> {
+
     @Override
     public Supplier<RouteWithStopsAggregator> supplier() {
         return RouteWithStopsAggregator::new;
@@ -17,7 +18,7 @@ class RouteWithStopsCollector implements Collector<Integer, RouteWithStopsAggreg
 
     @Override
     public BiConsumer<RouteWithStopsAggregator, Integer> accumulator() {
-        return RouteWithStopsAggregator::add;
+        return RouteWithStopsAggregator::addData;
     }
 
     @Override

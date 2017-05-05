@@ -9,18 +9,18 @@ import java.util.stream.Stream;
 
 public class RouteStopsMapAggregator implements Supplier<RouteStopsMapAggregator> {
 
-    private StopsAndRoutes routeStopsMapBuilder;
+    private RoutesAtStation routesAtStation;
 
     public RouteStopsMapAggregator() {
-        this.routeStopsMapBuilder = new StopsAndRoutes();
+        this.routesAtStation = new RoutesAtStation();
     }
 
     public void add(RouteWithStops routeWithStops) {
-        this.routeStopsMapBuilder.add(routeWithStops);
+        this.routesAtStation.add(routeWithStops);
     }
 
-    public StopsAndRoutes finish() {
-        return this.routeStopsMapBuilder.build();
+    public RoutesAtStation finish() {
+        return this.routesAtStation;
     }
 
     @Override
@@ -30,10 +30,10 @@ public class RouteStopsMapAggregator implements Supplier<RouteStopsMapAggregator
 
     public RouteStopsMapAggregator sum(RouteStopsMapAggregator routeStopsMapAggregator) {
 
-        Map<Integer, Set<Integer>> stopRoutesMap = routeStopsMapAggregator.routeStopsMapBuilder.getStopRoutesMap();
+        Map<Integer, Set<Integer>> stopRoutesMap = routeStopsMapAggregator.routesAtStation.getMap();
 
 
-        Map<Integer, Set<Integer>> merged = Stream.of(stopRoutesMap, routeStopsMapBuilder.getStopRoutesMap())
+        Map<Integer, Set<Integer>> merged = Stream.of(stopRoutesMap, routesAtStation.getMap())
                 .map(Map::entrySet)
                 .flatMap(Set::stream)
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (a, b) -> {
@@ -42,7 +42,7 @@ public class RouteStopsMapAggregator implements Supplier<RouteStopsMapAggregator
                     return both;
                 }));
 
-        routeStopsMapBuilder.setRouteStops(merged);
+        routesAtStation.setRouteStops(merged);
         return this;
     }
 }

@@ -24,27 +24,29 @@ class RouteWithStops {
 
     static class Builder {
 
-        private final ImmutableSet.Builder<Integer> stops;
-        private int route = -1;
+        private final ImmutableSet.Builder<Integer> stations;
+        private int route;
 
         Builder() {
-            this.stops = new ImmutableSet.Builder<>();
-        }
-
-        void setValue(Integer value) {
-            if (route == -1) {
-                this.route = value;
-            } else {
-                this.stops.add(value);
-            }
+            this.stations = new ImmutableSet.Builder<>();
         }
 
         RouteWithStops build() {
-            return new RouteWithStops(route, stops.build());
+            return new RouteWithStops(route, stations.build());
         }
 
-        ImmutableSet.Builder<Integer> getStops() {
-            return stops;
+        ImmutableSet.Builder<Integer> getStations() {
+            return stations;
+        }
+
+        public Builder setRoute(int route) {
+            this.route = route;
+            return this;
+        }
+
+        public Builder addStation(int station) {
+            this.stations.add(station);
+            return this;
         }
     }
 }

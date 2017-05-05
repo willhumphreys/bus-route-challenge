@@ -4,28 +4,34 @@ import java.util.function.Supplier;
 
 public class RouteWithStopsAggregator implements Supplier<RouteWithStopsAggregator> {
 
+    private boolean isRouteSet;
     private final RouteWithStops.Builder routeWithStopsBuilder;
 
-    public RouteWithStopsAggregator() {
+    RouteWithStopsAggregator() {
         routeWithStopsBuilder = new RouteWithStops.Builder();
     }
 
-    public void add(Integer value) {
-        this.routeWithStopsBuilder.setValue(value);
-    }
-
-    public RouteWithStopsAggregator sum(RouteWithStopsAggregator routeWithStopsAggregator) {
-        routeWithStopsBuilder.getStops()
-                .addAll(routeWithStopsAggregator.routeWithStopsBuilder.getStops().build());
+    RouteWithStopsAggregator sum(RouteWithStopsAggregator routeWithStopsAggregator) {
+        routeWithStopsBuilder.getStations()
+                .addAll(routeWithStopsAggregator.routeWithStopsBuilder.getStations().build());
         return this;
     }
 
-    public RouteWithStops finish() {
+    RouteWithStops finish() {
         return this.routeWithStopsBuilder.build();
     }
 
     @Override
     public RouteWithStopsAggregator get() {
         return new RouteWithStopsAggregator();
+    }
+
+    void addData(Integer routeOrStop) {
+        if(isRouteSet) {
+            this.routeWithStopsBuilder.setRoute(routeOrStop);
+            isRouteSet = false;
+        } else {
+            this.routeWithStopsBuilder.addStation(routeOrStop);
+        }
     }
 }
