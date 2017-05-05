@@ -1,19 +1,22 @@
 package com.goeuro.challenges;
 
-import org.slf4j.Logger;
+import com.goeuro.challenges.data.DirectJourneyRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import static java.lang.invoke.MethodHandles.lookup;
-import static org.slf4j.LoggerFactory.getLogger;
+import java.io.IOException;
 
 @Service
 public class DirectJourneyService {
 
-    private static final Logger LOG = getLogger(lookup().lookupClass());
+    private DirectJourneyRepository directJourneyRepository;
 
-    public boolean isDirect(Journey journey) {
-        return true;
+    @Autowired
+    public DirectJourneyService(DirectJourneyRepository directJourneyRepository) throws IOException {
+        this.directJourneyRepository = directJourneyRepository;
     }
 
-
+    boolean isDirect(Journey journey) {
+        return directJourneyRepository.isDirect(journey);
+    }
 }
