@@ -9,25 +9,25 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 
-class RouteStopMapCollector implements Collector<RouteWithStops, RouteStopsMapAggregator, RoutesAtStation> {
+class RouteStopMapCollector implements Collector<RouteWithStations, RouteWithStationsMapAggregator, RoutesAtStation> {
     @Override
-    public Supplier<RouteStopsMapAggregator> supplier() {
-        return RouteStopsMapAggregator::new;
+    public Supplier<RouteWithStationsMapAggregator> supplier() {
+        return RouteWithStationsMapAggregator::new;
     }
 
     @Override
-    public BiConsumer<RouteStopsMapAggregator, RouteWithStops> accumulator() {
-        return RouteStopsMapAggregator::add;
+    public BiConsumer<RouteWithStationsMapAggregator, RouteWithStations> accumulator() {
+        return RouteWithStationsMapAggregator::add;
     }
 
     @Override
-    public BinaryOperator<RouteStopsMapAggregator> combiner() {
-        return RouteStopsMapAggregator::sum;
+    public BinaryOperator<RouteWithStationsMapAggregator> combiner() {
+        return RouteWithStationsMapAggregator::sum;
     }
 
     @Override
-    public Function<RouteStopsMapAggregator, RoutesAtStation> finisher() {
-        return RouteStopsMapAggregator::finish;
+    public Function<RouteWithStationsMapAggregator, RoutesAtStation> finisher() {
+        return RouteWithStationsMapAggregator::finish;
     }
 
     @Override

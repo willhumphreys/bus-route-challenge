@@ -4,22 +4,22 @@ import com.google.common.collect.ImmutableSet;
 
 import java.util.Set;
 
-class RouteWithStops {
+class RouteWithStations {
 
     private final int route;
-    private final Set<Integer> stops;
+    private final Set<Integer> stations;
 
-    private RouteWithStops(int route, Set<Integer> stops) {
+    private RouteWithStations(int route, Set<Integer> stations) {
         this.route = route;
-        this.stops = stops;
+        this.stations = stations;
     }
 
     Integer getRoute() {
         return route;
     }
 
-    Set<Integer> getStops() {
-        return stops;
+    Set<Integer> getStations() {
+        return stations;
     }
 
     static class Builder {
@@ -31,8 +31,8 @@ class RouteWithStops {
             this.stations = new ImmutableSet.Builder<>();
         }
 
-        RouteWithStops build() {
-            return new RouteWithStops(route, stations.build());
+        RouteWithStations build() {
+            return new RouteWithStations(route, stations.build());
         }
 
         ImmutableSet.Builder<Integer> getStations() {

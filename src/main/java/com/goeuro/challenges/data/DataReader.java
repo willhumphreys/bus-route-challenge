@@ -32,7 +32,7 @@ public class DataReader {
 
             return bufferedReader.lines()
                     .map(line -> Arrays.stream(line.split(" "))
-                            .mapToInt(Integer::parseInt).boxed().collect(new RouteWithStopsCollector()))
+                            .mapToInt(Integer::parseInt).boxed().collect(new RouteWithStationsCollector()))
                     .collect(new RouteStopMapCollector());
         } catch (IOException e) {
             LOG.error("Problem reading the route data.", e);
