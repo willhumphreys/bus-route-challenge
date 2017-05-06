@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 
 public class RouteWithStationsMapAggregator implements Supplier<RouteWithStationsMapAggregator> {
 
-    private RoutesAtStation routesAtStation;
+    private final RoutesAtStation routesAtStation;
 
     public RouteWithStationsMapAggregator() {
         this.routesAtStation = new RoutesAtStation();

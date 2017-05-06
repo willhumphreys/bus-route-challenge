@@ -1,8 +1,8 @@
 package com.goeuro.challenges;
 
 public class Journey {
-    private int departureSid;
-    private int arrivalSid;
+    private final int departureSid;
+    private final int arrivalSid;
 
     public Journey(int departureSid, int arrivalSid) {
         this.departureSid = departureSid;

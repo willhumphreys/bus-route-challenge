@@ -19,7 +19,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 public class DataReader {
 
     private static final Logger LOG = getLogger(lookup().lookupClass());
-    private String dataLocation;
+    private final String dataLocation;
 
     @Autowired
     public DataReader(@Value("${data.location}") String dataLocation) {

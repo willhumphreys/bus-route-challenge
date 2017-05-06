@@ -1,10 +1,9 @@
 package com.goeuro.challenges;
 
 public class DirectJourney {
-    private int departureSid;
-    private int arrivalSid;
-    private boolean directBusRoute;
-
+    private final int departureSid;
+    private final int arrivalSid;
+    private final boolean directBusRoute;
 
     public DirectJourney(int departureSid, int arrivalSid, boolean directBusRoute) {
         this.departureSid = departureSid;

@@ -9,7 +9,7 @@ import java.io.IOException;
 @Service
 public class DirectJourneyService {
 
-    private DirectJourneyRepository directJourneyRepository;
+    private final DirectJourneyRepository directJourneyRepository;
 
     @Autowired
     public DirectJourneyService(DirectJourneyRepository directJourneyRepository) throws IOException {
