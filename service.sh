@@ -12,7 +12,7 @@ dev_build() {
 dev_run() {
   # Do what you need to run your app in the foreground
   # e.g. java -jar target/magic.jar $*
-  java -jar build/libs/bus-route-challenge-0.0.1-SNAPSHOT.jar --data.location S*
+  java -jar build/libs/bus-route-challenge-0.0.1-SNAPSHOT.jar --data.location=$1
 }
 
 dev_smoke() {
