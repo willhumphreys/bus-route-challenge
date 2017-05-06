@@ -6,13 +6,15 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Spliterator;
 import java.util.stream.StreamSupport;
 
 import static java.lang.invoke.MethodHandles.lookup;
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.slf4j.LoggerFactory.getLogger;
 
 @Component
@@ -30,7 +32,8 @@ public class DataReader {
 
     RoutesAtStation read() throws IOException {
 
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(dataLocation))) {
+        try (BufferedReader bufferedReader = new BufferedReader(
+                new InputStreamReader(new FileInputStream(dataLocation), UTF_8))) {
             int lineCount = Integer.parseInt(bufferedReader.readLine());
             LOG.info("File contains {} routes", lineCount);
 
