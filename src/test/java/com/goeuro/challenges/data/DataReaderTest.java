@@ -3,6 +3,7 @@ package com.goeuro.challenges.data;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.Optional;
 import java.util.Set;
 
@@ -38,5 +39,11 @@ public class DataReaderTest {
     public void shouldReturnNoRoutesIfTheStopDoesNotExist() throws Exception {
         Optional<Set<Integer>> routesAtStop = routesAtStation.get(3333);
         assertThat(routesAtStop.isPresent(), is(false));
+    }
+
+    @Test(expected = IOException.class)
+    public void shouldThrowAnExceptionIfThereIsAnIOException() throws Exception {
+        DataReader dataReader = new DataReader("invalidLocation");
+        routesAtStation = dataReader.read();
     }
 }
