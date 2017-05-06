@@ -19,6 +19,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 public class DataReader {
 
     private static final Logger LOG = getLogger(lookup().lookupClass());
+    private static final String LINE_SEPARATOR = " ";
     private final String dataLocation;
 
     @Autowired
@@ -34,7 +35,7 @@ public class DataReader {
 
             return bufferedReader.lines()
                     .map(line -> {
-                         Spliterator<Integer> iterator = Arrays.stream(line.split(" "))
+                         Spliterator<Integer> iterator = Arrays.stream(line.split(LINE_SEPARATOR))
                                 .mapToInt(Integer::parseInt).boxed().spliterator();
 
                         RouteWithStationsCollector collector = new RouteWithStationsCollector();
