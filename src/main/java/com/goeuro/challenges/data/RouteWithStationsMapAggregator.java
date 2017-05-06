@@ -32,11 +32,11 @@ public class RouteWithStationsMapAggregator implements Supplier<RouteWithStation
 
         Map<Integer, Set<Integer>> stopRoutesMap = routeWithStationsMapAggregator.routesAtStation.getMap();
 
-        routesAtStation.setRouteStations(mergeStopRoutesMaps(stopRoutesMap));
+        routesAtStation.setRouteStations(mergeStationRoutesMaps(stopRoutesMap));
         return this;
     }
 
-    private Map<Integer, Set<Integer>> mergeStopRoutesMaps(Map<Integer, Set<Integer>> stopRoutesMap) {
+    private Map<Integer, Set<Integer>> mergeStationRoutesMaps(Map<Integer, Set<Integer>> stopRoutesMap) {
         return Stream.of(stopRoutesMap, routesAtStation.getMap())
                 .map(Map::entrySet)
                 .flatMap(Set::stream)
