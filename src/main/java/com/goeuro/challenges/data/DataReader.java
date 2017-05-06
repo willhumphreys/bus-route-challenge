@@ -5,10 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.Arrays;
 import java.util.Spliterator;
 import java.util.stream.StreamSupport;
@@ -31,7 +28,6 @@ public class DataReader {
     }
 
     RoutesAtStation read() throws IOException {
-
         try (BufferedReader bufferedReader = new BufferedReader(
                 new InputStreamReader(new FileInputStream(dataLocation), UTF_8))) {
             int lineCount = Integer.parseInt(bufferedReader.readLine());
@@ -39,7 +35,7 @@ public class DataReader {
 
             return bufferedReader.lines()
                     .map(line -> {
-                         Spliterator<Integer> iterator = Arrays.stream(line.split(LINE_SEPARATOR))
+                        Spliterator<Integer> iterator = Arrays.stream(line.split(LINE_SEPARATOR))
                                 .mapToInt(Integer::parseInt).boxed().spliterator();
 
                         RouteWithStationsCollector collector = new RouteWithStationsCollector();
@@ -47,6 +43,9 @@ public class DataReader {
                         return StreamSupport.stream(iterator, SPLIT_LINE_IN_PARALLEL).collect(collector);
                     })
                     .collect(new RouteStopMapCollector());
+        } catch (FileNotFoundException e) {
+            LOG.error(String.format("Unable to locate the data file at '%s'", dataLocation), e);
+            throw e;
         } catch (IOException e) {
             LOG.error("Problem reading the route data.", e);
             throw e;
