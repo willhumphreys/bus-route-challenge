@@ -11,15 +11,15 @@ public class RouteWithStationsMapAggregator implements Supplier<RouteWithStation
 
     private final RoutesAtStation routesAtStation;
 
-    public RouteWithStationsMapAggregator() {
+    RouteWithStationsMapAggregator() {
         this.routesAtStation = new RoutesAtStation();
     }
 
-    public void add(RouteWithStations routeWithStations) {
+    void add(RouteWithStations routeWithStations) {
         this.routesAtStation.add(routeWithStations);
     }
 
-    public RoutesAtStation finish() {
+    RoutesAtStation finish() {
         return this.routesAtStation;
     }
 
@@ -28,11 +28,16 @@ public class RouteWithStationsMapAggregator implements Supplier<RouteWithStation
         return new RouteWithStationsMapAggregator();
     }
 
-    public RouteWithStationsMapAggregator sum(RouteWithStationsMapAggregator routeWithStationsMapAggregator) {
+    RouteWithStationsMapAggregator sum(RouteWithStationsMapAggregator routeWithStationsMapAggregator) {
 
         Map<Integer, Set<Integer>> stopRoutesMap = routeWithStationsMapAggregator.routesAtStation.getMap();
 
-        Map<Integer, Set<Integer>> merged = Stream.of(stopRoutesMap, routesAtStation.getMap())
+        routesAtStation.setRouteStations(mergeStopRoutesMaps(stopRoutesMap));
+        return this;
+    }
+
+    private Map<Integer, Set<Integer>> mergeStopRoutesMaps(Map<Integer, Set<Integer>> stopRoutesMap) {
+        return Stream.of(stopRoutesMap, routesAtStation.getMap())
                 .map(Map::entrySet)
                 .flatMap(Set::stream)
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (a, b) -> {
@@ -40,8 +45,5 @@ public class RouteWithStationsMapAggregator implements Supplier<RouteWithStation
                     both.addAll(b);
                     return both;
                 }));
-
-        routesAtStation.setRouteStations(merged);
-        return this;
     }
 }
