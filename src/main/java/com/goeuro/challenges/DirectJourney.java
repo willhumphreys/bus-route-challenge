@@ -5,7 +5,7 @@ public class DirectJourney {
     private final int arrivalSid;
     private final boolean directBusRoute;
 
-    public DirectJourney(int departureSid, int arrivalSid, boolean directBusRoute) {
+    DirectJourney(int departureSid, int arrivalSid, boolean directBusRoute) {
         this.departureSid = departureSid;
         this.arrivalSid = arrivalSid;
         this.directBusRoute = directBusRoute;
