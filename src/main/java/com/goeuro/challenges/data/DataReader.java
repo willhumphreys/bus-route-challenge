@@ -20,6 +20,7 @@ public class DataReader {
 
     private static final Logger LOG = getLogger(lookup().lookupClass());
     private static final String LINE_SEPARATOR = " ";
+    private static final boolean SPLIT_LINE_IN_PARALLEL = false;
     private final String dataLocation;
 
     @Autowired
@@ -40,7 +41,7 @@ public class DataReader {
 
                         RouteWithStationsCollector collector = new RouteWithStationsCollector();
                         iterator.tryAdvance(collector::setRoute);
-                        return StreamSupport.stream(iterator, false).collect(collector);
+                        return StreamSupport.stream(iterator, SPLIT_LINE_IN_PARALLEL).collect(collector);
                     })
                     .collect(new RouteStopMapCollector());
         } catch (IOException e) {
