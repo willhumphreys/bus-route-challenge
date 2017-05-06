@@ -6,7 +6,7 @@ class RoutesAtStation {
     private static final int NUMBER_OF_STATIONS = 1_000_000;
     private static final int NUMBER_OF_BUS_ROUTES = 100_000;
     private static final int MAX_STATIONS_ON_A_ROUTE = 1000;
-    private final int AVERAGE_NUMBER_OF_ROUTES_PER_STOP =
+    private static final int AVERAGE_NUMBER_OF_ROUTES_PER_STOP =
             NUMBER_OF_BUS_ROUTES * MAX_STATIONS_ON_A_ROUTE / NUMBER_OF_STATIONS;
 
     private Map<Integer, Set<Integer>> map = new HashMap<>(NUMBER_OF_STATIONS);
