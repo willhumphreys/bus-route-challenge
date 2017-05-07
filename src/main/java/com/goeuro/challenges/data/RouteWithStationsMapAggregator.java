@@ -30,14 +30,14 @@ public class RouteWithStationsMapAggregator implements Supplier<RouteWithStation
 
     RouteWithStationsMapAggregator sum(RouteWithStationsMapAggregator routeWithStationsMapAggregator) {
 
-        Map<Integer, Set<Integer>> stopRoutesMap = routeWithStationsMapAggregator.routesAtStation.getMap();
+        Map<Integer, Set<Integer>> stationRoutesMap = routeWithStationsMapAggregator.routesAtStation.getStationToRoutesMap();
 
-        routesAtStation.setRouteStations(mergeStationRoutesMaps(stopRoutesMap));
+        routesAtStation.setRouteStations(mergeStationRoutesMaps(stationRoutesMap));
         return this;
     }
 
-    private Map<Integer, Set<Integer>> mergeStationRoutesMaps(Map<Integer, Set<Integer>> stopRoutesMap) {
-        return Stream.of(stopRoutesMap, routesAtStation.getMap())
+    private Map<Integer, Set<Integer>> mergeStationRoutesMaps(Map<Integer, Set<Integer>> stationRoutesMap) {
+        return Stream.of(stationRoutesMap, routesAtStation.getStationToRoutesMap())
                 .map(Map::entrySet)
                 .flatMap(Set::stream)
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (a, b) -> {
