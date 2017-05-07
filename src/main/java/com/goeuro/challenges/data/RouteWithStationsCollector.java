@@ -1,6 +1,7 @@
 package com.goeuro.challenges.data;
 
 import com.google.common.collect.Sets;
+import org.slf4j.Logger;
 
 import java.util.Set;
 import java.util.function.BiConsumer;
@@ -9,7 +10,11 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 
+import static java.lang.invoke.MethodHandles.lookup;
+import static org.slf4j.LoggerFactory.getLogger;
+
 class RouteWithStationsCollector implements Collector<Integer, RouteWithStationsAggregator, RouteWithStations> {
+    private static final Logger LOG = getLogger(lookup().lookupClass());
 
     private Integer route;
 
@@ -39,6 +44,7 @@ class RouteWithStationsCollector implements Collector<Integer, RouteWithStations
     }
 
     void setRoute(Integer route) {
+        LOG.info("Reading route {}", route);
         this.route = route;
     }
 }
