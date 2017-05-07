@@ -1,6 +1,5 @@
 package com.goeuro.challenges.data;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,18 +14,11 @@ import static org.junit.Assert.assertThat;
 public class DataReaderTest {
 
     private RoutesAtStation routesAtStation;
-    private DataReader dataReader;
 
     @Before
     public void setUp() throws Exception {
-        dataReader = new DataReader("data/example");
+        DataReader dataReader = new DataReader("data/example");
         routesAtStation = dataReader.read();
-        //Files.delete(Paths.get("file.db"));
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        routesAtStation.close();
     }
 
     @SuppressWarnings("ConstantConditions")
@@ -45,8 +37,8 @@ public class DataReaderTest {
 
     @Test
     public void shouldReturnNoRoutesIfTheStopDoesNotExist() throws Exception {
-        Optional<Set<Integer>> routesAtStation = this.routesAtStation.get(3333);
-        assertThat(routesAtStation.isPresent(), is(false));
+        Optional<Set<Integer>> routesAtStop = routesAtStation.get(3333);
+        assertThat(routesAtStop.isPresent(), is(false));
     }
 
     @Test(expected = IOException.class)

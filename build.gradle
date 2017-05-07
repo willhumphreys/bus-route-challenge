@@ -25,7 +25,5 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-rest')
 	// https://mvnrepository.com/artifact/com.google.guava/guava
 	compile group: 'com.google.guava', name: 'guava', version: '21.0'
-	// https://mvnrepository.com/artifact/org.mapdb/mapdb
-	compile group: 'org.mapdb', name: 'mapdb', version: '3.0.4'
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
