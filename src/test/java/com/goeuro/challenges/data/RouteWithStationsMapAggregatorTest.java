@@ -1,5 +1,6 @@
 package com.goeuro.challenges.data;
 
+import com.koloboke.collect.set.IntSet;
 import org.junit.Test;
 
 import java.util.Set;
@@ -25,12 +26,12 @@ public class RouteWithStationsMapAggregatorTest {
 
         routeWithStationsMapAggregator.sum(routeWithStationsMapAggregator2);
         RoutesAtStation routesAtStation = routeWithStationsMapAggregator.finish();
-        Set<Integer> routesAtStop9 = routesAtStation.get(9).get();
+        IntSet routesAtStop9 = routesAtStation.get(9).get();
 
         assertThat(routesAtStop9.size(), is(equalTo(1)));
         assertThat(routesAtStop9.contains(4), is(true));
 
-        Set<Integer> routesAtStop5 = routesAtStation.get(5).get();
+        IntSet routesAtStop5 = routesAtStation.get(5).get();
         assertThat(routesAtStop5.size(), is(equalTo(2)));
         assertThat(routesAtStop5.contains(3), is(true));
         assertThat(routesAtStop5.contains(4), is(true));

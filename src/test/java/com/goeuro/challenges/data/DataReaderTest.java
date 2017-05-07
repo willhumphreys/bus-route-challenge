@@ -1,5 +1,6 @@
 package com.goeuro.challenges.data;
 
+import com.koloboke.collect.set.IntSet;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,20 +25,20 @@ public class DataReaderTest {
     @SuppressWarnings("ConstantConditions")
     @Test
     public void shouldReturnRoutesAtAStop150() throws Exception {
-        Set<Integer> routesAtStop = routesAtStation.get(150).get();
+        IntSet routesAtStop = routesAtStation.get(150).get();
         assertThat(routesAtStop.size(), is(equalTo(4)));
     }
 
     @SuppressWarnings("ConstantConditions")
     @Test
     public void shouldReturnRoutesAtAStop121() throws Exception {
-        Set<Integer> routesAtStop = routesAtStation.get(121).get();
+        IntSet routesAtStop = routesAtStation.get(121).get();
         assertThat(routesAtStop.size(), is(equalTo(3)));
     }
 
     @Test
     public void shouldReturnNoRoutesIfTheStopDoesNotExist() throws Exception {
-        Optional<Set<Integer>> routesAtStop = routesAtStation.get(3333);
+        Optional<IntSet> routesAtStop = routesAtStation.get(3333);
         assertThat(routesAtStop.isPresent(), is(false));
     }
 

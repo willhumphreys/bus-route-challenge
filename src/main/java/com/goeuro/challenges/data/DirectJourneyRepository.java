@@ -2,6 +2,7 @@ package com.goeuro.challenges.data;
 
 import com.goeuro.challenges.Journey;
 import com.google.common.collect.Sets;
+import com.koloboke.collect.set.IntSet;
 import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
@@ -18,12 +19,12 @@ public class DirectJourneyRepository {
     }
 
     public boolean isDirect(Journey journey) {
-        Optional<Set<Integer>> routesAtDeparture = routesAtStation.get(journey.getDepartureSid());
+        Optional<IntSet> routesAtDeparture = routesAtStation.get(journey.getDepartureSid());
         if(!routesAtDeparture.isPresent()) {
             return false;
         }
 
-        Optional<Set<Integer>> routesAtArrivals = routesAtStation.get(journey.getArrivalSid());
+        Optional<IntSet> routesAtArrivals = routesAtStation.get(journey.getArrivalSid());
         if(!routesAtArrivals.isPresent()) {
             return false;
         }

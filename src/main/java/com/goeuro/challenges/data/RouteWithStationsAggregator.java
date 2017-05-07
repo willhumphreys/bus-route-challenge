@@ -12,7 +12,7 @@ public class RouteWithStationsAggregator implements Supplier<RouteWithStationsAg
 
     RouteWithStationsAggregator sum(RouteWithStationsAggregator routeWithStationsAggregator) {
         routeWithStationsBuilder.getStations()
-                .addAll(routeWithStationsAggregator.routeWithStationsBuilder.getStations().build());
+                .addAll(routeWithStationsAggregator.routeWithStationsBuilder.getStations());
         return this;
     }
 

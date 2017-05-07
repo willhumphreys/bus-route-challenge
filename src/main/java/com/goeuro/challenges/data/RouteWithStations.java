@@ -1,15 +1,17 @@
 package com.goeuro.challenges.data;
 
-import com.google.common.collect.ImmutableSet;
+import com.koloboke.collect.set.IntSet;
+import com.koloboke.collect.set.hash.HashIntSet;
+import com.koloboke.collect.set.hash.HashIntSets;
 
-import java.util.Set;
+import static com.goeuro.challenges.data.RoutesAtStation.MAX_STATIONS_ON_A_ROUTE;
 
 class RouteWithStations {
 
     private final int route;
-    private final Set<Integer> stations;
+    private final IntSet stations;
 
-    private RouteWithStations(int route, Set<Integer> stations) {
+    private RouteWithStations(int route, IntSet stations) {
         this.route = route;
         this.stations = stations;
     }
@@ -18,24 +20,24 @@ class RouteWithStations {
         return route;
     }
 
-    Set<Integer> getStations() {
+    IntSet getStations() {
         return stations;
     }
 
     static class Builder {
 
-        private final ImmutableSet.Builder<Integer> stations;
+        private final HashIntSet stations;
         private int route;
 
         Builder() {
-            this.stations = new ImmutableSet.Builder<>();
+            this.stations = HashIntSets.newMutableSet(MAX_STATIONS_ON_A_ROUTE);
         }
 
         RouteWithStations build() {
-            return new RouteWithStations(route, stations.build());
+            return new RouteWithStations(route, stations);
         }
 
-        ImmutableSet.Builder<Integer> getStations() {
+        HashIntSet getStations() {
             return stations;
         }
 

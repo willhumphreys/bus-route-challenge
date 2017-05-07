@@ -25,5 +25,11 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-rest')
 	// https://mvnrepository.com/artifact/com.google.guava/guava
 	compile group: 'com.google.guava', name: 'guava', version: '21.0'
+	// `jdk6-7` instead of `jdk8` if you use Java 7 or older
+	compile 'com.koloboke:koloboke-api-jdk8:1.0.0'
+	runtime 'com.koloboke:koloboke-impl-jdk8:1.0.0'
+
+	// https://mvnrepository.com/artifact/com.koloboke/koloboke-compile
+	compile group: 'com.koloboke', name: 'koloboke-compile', version: '0.5.1'
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
