@@ -3,8 +3,6 @@ package com.goeuro.challenges.data;
 import com.koloboke.collect.set.IntSet;
 import org.junit.Test;
 
-import java.util.Set;
-
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
