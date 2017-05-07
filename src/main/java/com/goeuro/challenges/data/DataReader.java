@@ -15,7 +15,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.slf4j.LoggerFactory.getLogger;
 
 @Component
-public class DataReader {
+class DataReader {
 
     private static final Logger LOG = getLogger(lookup().lookupClass());
     private static final String LINE_SEPARATOR = " ";

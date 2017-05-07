@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class DirectConnectionController {
+class DirectConnectionController {
 
     private final DirectJourneyService directJourneyService;
 
