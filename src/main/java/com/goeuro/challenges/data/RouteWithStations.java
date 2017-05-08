@@ -16,7 +16,7 @@ class RouteWithStations {
         this.stations = stations;
     }
 
-    Integer getRoute() {
+    int getRoute() {
         return route;
     }
 
