@@ -41,12 +41,12 @@ class RouteWithStations {
             return stations;
         }
 
-        public Builder setRoute(int route) {
+        Builder setRoute(int route) {
             this.route = route;
             return this;
         }
 
-        public Builder addStation(int station) {
+        Builder addStation(int station) {
             this.stations.add(station);
             return this;
         }
