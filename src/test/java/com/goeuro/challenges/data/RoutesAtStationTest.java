@@ -30,31 +30,31 @@ public class RoutesAtStationTest {
 
     @Test
     public void shouldReturnTrueIfThereIsADirectRoute() throws Exception {
-        assertThat(routesAtStation.get(
+        assertThat(routesAtStation.isDirectRoute(
                 new Journey(50, 34)), is(true));
     }
 
     @Test
     public void shouldReturnTrueIfThereIsAAnotherDirectRoute() throws Exception {
-        assertThat(routesAtStation.get(
+        assertThat(routesAtStation.isDirectRoute(
                 new Journey(34, 90)), is(true));
     }
 
     @Test
     public void shouldReturnFalseIfThereIsNotADirectRoute() throws Exception {
-        assertThat(routesAtStation.get(
+        assertThat(routesAtStation.isDirectRoute(
                 new Journey(10, 90)), is(false));
     }
 
     @Test
     public void shouldReturnFalseIfAStationDoesNotExist() throws Exception {
-        assertThat(routesAtStation.get(
+        assertThat(routesAtStation.isDirectRoute(
                 new Journey(1, 90)), is(false));
     }
 
     @Test
     public void shouldReturnFalseIfBothStationsDoNotExist() throws Exception {
-        assertThat(routesAtStation.get(
+        assertThat(routesAtStation.isDirectRoute(
                 new Journey(1, 2)), is(false));
     }
 }
